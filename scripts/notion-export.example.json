@@ -1,0 +1,19 @@
+{
+  "categories": [
+    { "slug": "comecando", "title": "Começando na PHIQ", "sort_order": 1 }
+  ],
+  "articles": [
+    {
+      "category_slug": "comecando",
+      "slug": "visao-geral",
+      "title": "Visão geral da PHIQ",
+      "summary": "Apresentação da rede",
+      "blocks": [
+        { "type": "heading", "text": "Nossa atuação" },
+        { "type": "paragraph", "text": "Substitua pelo conteúdo aprovado pela PHIQ." }
+      ],
+      "tags": ["institucional"],
+      "links": []
+    }
+  ]
+}
