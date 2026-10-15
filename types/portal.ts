@@ -6,7 +6,15 @@ export type TicketCategory = 'operational' | 'commercial' | 'administrative'
 export type TicketStatus = 'open' | 'in_progress' | 'waiting_customer' | 'resolved' | 'closed'
 export type TicketPriority = 'low' | 'normal' | 'high' | 'urgent'
 
-export interface Profile { id: UUID; full_name: string; email: string | null; role: PortalRole; active: boolean }
+export interface Profile {
+  id: UUID
+  userId: UUID
+  full_name: string
+  email: string | null
+  role: PortalRole
+  franchiseId: UUID | null
+  active: boolean
+}
 export interface FranchiseUnit { id: UUID; code: string; name: string; city: string | null; state_code: string | null; status: 'active' | 'inactive' }
 export interface FranchiseMember { unit_id: UUID; user_id: UUID; is_primary: boolean }
 export interface NafAssignment { unit_id: UUID; naf_user_id: UUID }

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Client, Databases, ID } from 'node-appwrite';
 import { APPWRITE_CONFIG } from '@/src/lib/appwrite/config';
 import crypto from 'crypto';
-import type { Profile } from '@/types/portal';
+import { getAuthenticatedContext } from '@/src/lib/appwrite/server-auth';
 
 function createAdminClient() {
   return new Client()
@@ -20,14 +20,10 @@ function generateCompactId(prefix: string, ...parts: string[]) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { userId, profile, progressId, status, observations } = body;
+    const { progressId, status, observations } = body;
+    const { userId, profile } = await getAuthenticatedContext(req);
 
-    if (!userId || !profile) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const profileTyped = profile as Profile;
-    if (profileTyped.role === 'franchisee') {
+    if (profile.role === 'franchisee') {
       return NextResponse.json({ error: 'Forbidden: Only NAF/ADMIN can approve' }, { status: 403 });
     }
 
@@ -90,6 +86,7 @@ export async function POST(req: Request) {
             }
           );
         } catch (e: unknown) {
+          if (e instanceof Response) return e;
           const err = e as { code?: number };
           if (err.code !== 409) throw e; // Ignore duplicate grants
         }

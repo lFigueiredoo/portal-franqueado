@@ -24,7 +24,8 @@ export const appwriteAuth = {
     try {
       return await account.get();
     } catch (error) {
-      return null;
+      console.error('Appwrite Session Error:', error);
+      throw error;
     }
   },
 

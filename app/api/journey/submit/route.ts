@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Client, Databases, ID } from 'node-appwrite';
 import { APPWRITE_CONFIG } from '@/src/lib/appwrite/config';
-import type { Profile } from '@/types/portal';
+import { getAuthenticatedContext } from '@/src/lib/appwrite/server-auth';
 
 function createAdminClient() {
   return new Client()
@@ -13,14 +13,10 @@ function createAdminClient() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { userId, profile, milestoneId, evidence } = body;
+    const { milestoneId, evidence } = body;
+    const { userId, profile } = await getAuthenticatedContext(req);
 
-    if (!userId || !profile) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const profileTyped = profile as Profile;
-    if (profileTyped.role === 'admin') { // ADMIN doesn't submit milestones usually
+    if (profile.role === 'admin') { // ADMIN doesn't submit milestones usually
         return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
@@ -52,7 +48,7 @@ export async function POST(req: Request) {
         collectionId: APPWRITE_CONFIG.collections.milestoneProgress,
         documentId: ID.unique(),
         data: {
-          franchiseId: profileTyped.id,
+          franchiseId: profile.franchiseId,
           milestoneId: milestoneId,
           status: 'Under Review',
           evidence: evidence,
@@ -63,6 +59,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(progress);
   } catch (e: unknown) {
+    if (e instanceof Response) return e;
     const message = e instanceof Error ? e.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }

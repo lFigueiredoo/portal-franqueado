@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Plus, Save, Eye, Trash2, FileText, BookOpen, Calendar } from 'lucide-react'
 import { communicationsRepository } from '@/services/communications/repository'
 import { knowledgeRepository } from '@/services/knowledge/repository'
@@ -13,16 +13,11 @@ export default function NafConteudos() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
 
-  const session = {
-    user: { $id: 'naf_user_id' },
-    profile: { role: 'NAF', franchiseId: 'all' }
-  }
-
   useEffect(() => {
     loadContent()
-  }, [activeTab])
+  }, [activeTab, loadContent])
 
-  const loadContent = async () => {
+  const loadContent = useCallback(async () => {
     setLoading(true)
     try {
       if (activeTab === 'comunicados') {
@@ -34,7 +29,7 @@ export default function NafConteudos() {
       }
     } catch (e) { setError(e.message) }
     finally { setLoading(false) }
-  }
+  }, [activeTab])
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -47,13 +42,13 @@ export default function NafConteudos() {
         await fetch('/api/communications', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: editing.$id, userId: session.user.$id, profile: session.profile, data })
+          body: JSON.stringify({ id: editing.$id, data })
         })
       } else {
         await fetch('/api/communications', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: session.user.$id, profile: session.profile, data })
+          body: JSON.stringify({ data })
         })
       }
       setEditing(null)

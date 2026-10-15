@@ -1,24 +1,21 @@
 import { NextResponse } from 'next/server';
 import { serverTickets } from '../server';
-import type { Profile, PortalRole } from '@/types/portal';
+import { getAuthenticatedContext } from '@/src/lib/appwrite/server-auth';
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const ticketId = searchParams.get('ticketId');
-    const userId = searchParams.get('userId');
-    const franchiseId = searchParams.get('franchiseId');
-    const role = searchParams.get('role');
+    const { userId, profile } = await getAuthenticatedContext(req);
 
-    if (!ticketId || !userId || !franchiseId || !role) {
+    if (!ticketId) {
       return NextResponse.json({ error: 'Missing parameters' }, { status: 400 });
     }
 
-    // We map the search params to a Profile-like object for the server helper
-    const profile = { id: franchiseId, role: role as PortalRole } as Profile;
     const messages = await serverTickets.listMessages(ticketId, userId, profile);
     return NextResponse.json(messages);
   } catch (e: unknown) {
+    if (e instanceof Response) return e;
     const message = e instanceof Error ? e.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }
@@ -27,16 +24,17 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { ticketId, userId, profile, message } = body;
+    const { ticketId, message } = body;
+    const { userId, profile } = await getAuthenticatedContext(req);
 
-    if (!ticketId || !userId || !profile) {
+    if (!ticketId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const profileTyped = profile as Profile;
-    const msg = await serverTickets.addMessage(ticketId, userId, profileTyped, { message });
+    const msg = await serverTickets.addMessage(ticketId, userId, profile, { message });
     return NextResponse.json(msg);
   } catch (e: unknown) {
+    if (e instanceof Response) return e;
     const message = e instanceof Error ? e.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }

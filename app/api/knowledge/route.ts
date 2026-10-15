@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Client, Databases, ID } from 'node-appwrite';
 import { APPWRITE_CONFIG } from '@/src/lib/appwrite/config';
+import { getAuthenticatedContext } from '@/src/lib/appwrite/server-auth';
 
 function createAdminClient() {
   return new Client()
@@ -12,9 +13,10 @@ function createAdminClient() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { userId, profile, data } = body;
+    const { profile } = await getAuthenticatedContext(req);
+    const { data } = body;
 
-    if (!userId || !profile || profile.role === 'FRANQUEADO') {
+    if (profile.role === 'franchisee') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
@@ -36,6 +38,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(page);
   } catch (e: unknown) {
+    if (e instanceof Response) return e;
     const message = e instanceof Error ? e.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }
@@ -44,9 +47,10 @@ export async function POST(req: Request) {
 export async function PATCH(req: Request) {
   try {
     const body = await req.json();
-    const { id, userId, profile, data } = body;
+    const { profile } = await getAuthenticatedContext(req);
+    const { id, data } = body;
 
-    if (!userId || !profile || profile.role === 'FRANQUEADO') {
+    if (profile.role === 'franchisee') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
@@ -67,6 +71,7 @@ export async function PATCH(req: Request) {
 
     return NextResponse.json(updated);
   } catch (e: unknown) {
+    if (e instanceof Response) return e;
     const message = e instanceof Error ? e.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }
@@ -75,9 +80,10 @@ export async function PATCH(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const body = await req.json();
-    const { id, userId, profile } = body;
+    const { profile } = await getAuthenticatedContext(req);
+    const { id } = body;
 
-    if (!userId || !profile || profile.role === 'FRANQUEADO') {
+    if (profile.role === 'franchisee') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
@@ -94,6 +100,7 @@ export async function DELETE(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (e: unknown) {
+    if (e instanceof Response) return e;
     const message = e instanceof Error ? e.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }

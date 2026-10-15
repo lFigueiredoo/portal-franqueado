@@ -29,7 +29,7 @@ export const serverTickets = {
           ...ticketData,
           protocol,
           createdBy: userId,
-          franchiseId: profile.id,
+          franchiseId: profile.franchiseId,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
           status: 'Aberto',

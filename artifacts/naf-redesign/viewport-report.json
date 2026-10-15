@@ -1,0 +1,413 @@
+{
+  "capture": "standalone Chrome + Playwright",
+  "deviceScaleFactor": 1,
+  "fixtures": true,
+  "results": [
+    {
+      "name": "desktop-1440-empty",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "data": {
+        "innerWidth": 1440,
+        "innerHeight": 1000,
+        "visualViewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "mobile": false,
+        "frames": 1,
+        "devicePixelRatio": 1,
+        "rects": {
+          ".naf-shell": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1031,
+            "right": 1440,
+            "bottom": 1031
+          },
+          ".naf-main": {
+            "x": 272,
+            "y": 0,
+            "width": 1168,
+            "height": 1031,
+            "right": 1440,
+            "bottom": 1031
+          },
+          ".naf-sidebar": {
+            "x": 0,
+            "y": 0,
+            "width": 272,
+            "height": 1000,
+            "right": 272,
+            "bottom": 1000
+          },
+          ".naf-topbar": {
+            "x": 272,
+            "y": 0,
+            "width": 1168,
+            "height": 76,
+            "right": 1440,
+            "bottom": 76
+          },
+          ".naf-queue": {
+            "x": 329.59375,
+            "y": 450.9375,
+            "width": 1052.8125,
+            "height": 406,
+            "right": 1382.40625,
+            "bottom": 856.9375
+          },
+          ".naf-detail": null
+        }
+      }
+    },
+    {
+      "name": "desktop-1440-details",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "data": {
+        "innerWidth": 1440,
+        "innerHeight": 1000,
+        "visualViewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "clientWidth": 1440,
+        "scrollWidth": 1440,
+        "mobile": false,
+        "frames": 1,
+        "devicePixelRatio": 1,
+        "rects": {
+          ".naf-shell": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1156.9375,
+            "right": 1440,
+            "bottom": 1156.9375
+          },
+          ".naf-main": {
+            "x": 272,
+            "y": 0,
+            "width": 1168,
+            "height": 1156.9375,
+            "right": 1440,
+            "bottom": 1156.9375
+          },
+          ".naf-sidebar": {
+            "x": 0,
+            "y": 0,
+            "width": 272,
+            "height": 1000,
+            "right": 272,
+            "bottom": 1000
+          },
+          ".naf-topbar": {
+            "x": 272,
+            "y": 0,
+            "width": 1168,
+            "height": 76,
+            "right": 1440,
+            "bottom": 76
+          },
+          ".naf-queue": {
+            "x": 329.59375,
+            "y": 450.9375,
+            "width": 492.484375,
+            "height": 642,
+            "right": 822.078125,
+            "bottom": 1092.9375
+          },
+          ".naf-detail": {
+            "x": 838.078125,
+            "y": 450.9375,
+            "width": 544.328125,
+            "height": 607.34375,
+            "right": 1382.40625,
+            "bottom": 1058.28125
+          }
+        }
+      }
+    },
+    {
+      "name": "desktop-1920-full",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "data": {
+        "innerWidth": 1920,
+        "innerHeight": 1080,
+        "visualViewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "clientWidth": 1920,
+        "scrollWidth": 1920,
+        "mobile": false,
+        "frames": 1,
+        "devicePixelRatio": 1,
+        "rects": {
+          ".naf-shell": {
+            "x": 0,
+            "y": 0,
+            "width": 1920,
+            "height": 1156.9375,
+            "right": 1920,
+            "bottom": 1156.9375
+          },
+          ".naf-main": {
+            "x": 272,
+            "y": 0,
+            "width": 1648,
+            "height": 1156.9375,
+            "right": 1920,
+            "bottom": 1156.9375
+          },
+          ".naf-sidebar": {
+            "x": 0,
+            "y": 0,
+            "width": 272,
+            "height": 1080,
+            "right": 272,
+            "bottom": 1080
+          },
+          ".naf-topbar": {
+            "x": 272,
+            "y": 0,
+            "width": 1648,
+            "height": 76,
+            "right": 1920,
+            "bottom": 76
+          },
+          ".naf-queue": {
+            "x": 379,
+            "y": 450.9375,
+            "width": 673.546875,
+            "height": 642,
+            "right": 1052.546875,
+            "bottom": 1092.9375
+          },
+          ".naf-detail": {
+            "x": 1068.546875,
+            "y": 450.9375,
+            "width": 744.4375,
+            "height": 607.34375,
+            "right": 1812.984375,
+            "bottom": 1058.28125
+          }
+        }
+      }
+    },
+    {
+      "name": "mobile-390-list",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "data": {
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "visualViewport": {
+          "width": 390,
+          "height": 844
+        },
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "mobile": true,
+        "frames": 1,
+        "devicePixelRatio": 1,
+        "rects": {
+          ".naf-shell": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1357.234375,
+            "right": 390,
+            "bottom": 1357.234375
+          },
+          ".naf-main": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1357.234375,
+            "right": 390,
+            "bottom": 1357.234375
+          },
+          ".naf-sidebar": {
+            "x": -272,
+            "y": 0,
+            "width": 272,
+            "height": 844,
+            "right": 0,
+            "bottom": 844
+          },
+          ".naf-topbar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 64,
+            "right": 390,
+            "bottom": 64
+          },
+          ".naf-queue": {
+            "x": 15,
+            "y": 647.234375,
+            "width": 360,
+            "height": 657,
+            "right": 375,
+            "bottom": 1304.234375
+          },
+          ".naf-detail": null
+        }
+      }
+    },
+    {
+      "name": "mobile-390-details",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "data": {
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "visualViewport": {
+          "width": 390,
+          "height": 844
+        },
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "mobile": true,
+        "frames": 1,
+        "devicePixelRatio": 1,
+        "rects": {
+          ".naf-shell": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1993.921875,
+            "right": 390,
+            "bottom": 1993.921875
+          },
+          ".naf-main": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1993.921875,
+            "right": 390,
+            "bottom": 1993.921875
+          },
+          ".naf-sidebar": {
+            "x": -272,
+            "y": 0,
+            "width": 272,
+            "height": 844,
+            "right": 0,
+            "bottom": 844
+          },
+          ".naf-topbar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 64,
+            "right": 390,
+            "bottom": 64
+          },
+          ".naf-queue": {
+            "x": 15,
+            "y": 647.234375,
+            "width": 360,
+            "height": 657,
+            "right": 375,
+            "bottom": 1304.234375
+          },
+          ".naf-detail": {
+            "x": 15,
+            "y": 1317.234375,
+            "width": 360,
+            "height": 636.6875,
+            "right": 375,
+            "bottom": 1953.921875
+          }
+        }
+      }
+    },
+    {
+      "name": "mobile-390-sidebar",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "data": {
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "visualViewport": {
+          "width": 390,
+          "height": 844
+        },
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "mobile": true,
+        "frames": 1,
+        "devicePixelRatio": 1,
+        "rects": {
+          ".naf-shell": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1993.921875,
+            "right": 390,
+            "bottom": 1993.921875
+          },
+          ".naf-main": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 1993.921875,
+            "right": 390,
+            "bottom": 1993.921875
+          },
+          ".naf-sidebar": {
+            "x": -57.200645446777344,
+            "y": 0,
+            "width": 272,
+            "height": 844,
+            "right": 214.79935455322266,
+            "bottom": 844
+          },
+          ".naf-topbar": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 64,
+            "right": 390,
+            "bottom": 64
+          },
+          ".naf-queue": {
+            "x": 15,
+            "y": 647.234375,
+            "width": 360,
+            "height": 657,
+            "right": 375,
+            "bottom": 1304.234375
+          },
+          ".naf-detail": {
+            "x": 15,
+            "y": 1317.234375,
+            "width": 360,
+            "height": 636.6875,
+            "right": 375,
+            "bottom": 1953.921875
+          }
+        }
+      }
+    }
+  ]
+}

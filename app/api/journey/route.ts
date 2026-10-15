@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Client, Databases } from 'node-appwrite';
 import { APPWRITE_CONFIG } from '@/src/lib/appwrite/config';
+import { getAuthenticatedContext } from '@/src/lib/appwrite/server-auth';
 
 function createAdminClient() {
   return new Client()
@@ -12,13 +13,10 @@ function createAdminClient() {
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get('userId');
-    const franchiseId = searchParams.get('franchiseId');
-    const role = searchParams.get('role');
-
-    if (!userId || !franchiseId || !role) {
-      return NextResponse.json({ error: 'Missing parameters' }, { status: 400 });
-    }
+    const { profile } = await getAuthenticatedContext(req);
+    const requestedFranchiseId = searchParams.get('franchiseId');
+    const franchiseId = profile.role === 'franchisee' ? profile.franchiseId : requestedFranchiseId;
+    if (!franchiseId) return NextResponse.json({ error: 'Franchise is required' }, { status: 400 });
 
     const client = createAdminClient();
     const databases = new Databases(client);
@@ -54,6 +52,7 @@ export async function GET(req: Request) {
       unlockedAchievements,
     });
   } catch (e: unknown) {
+    if (e instanceof Response) return e;
     const message = e instanceof Error ? e.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });
   }
